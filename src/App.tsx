@@ -1,33 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const toolKit = [
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'HTML',
+  'CSS',
+  'Node',
+  'Testes automatizados',
+];
+  const [index, setIndex] = useState(0)
 
+   function handleNextClick() {
+    if (index + 1 < toolKit.length) {
+      setIndex(index + 1);
+    } else {
+      setIndex(0); // Volta para o primeiro elemento
+    }
+  }
+
+  function handlePreviousClick() {
+    if (index - 1 >= 0) {
+      setIndex(index - 1);
+    } else {
+      setIndex(toolKit.length - 1); // Vai para o último elemento
+    }
+  }
+ 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>Caixa de ferramentas de uma Pessoa Desenvolvedora</h1>
+      <h2>{ toolKit[index] }</h2>
+      <button onClick = {handlePreviousClick}>Anterior</button>
+      <button onClick = {handleNextClick}>Próximo</button>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
