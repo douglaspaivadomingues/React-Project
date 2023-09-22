@@ -13,6 +13,7 @@ function App() {
   const [index, setIndex] = useState(0)
   const [toolList, setToolList] = useState(toolKit);
   const [inputValue, setInputValue] = useState('')
+  const [showImg, setShowImg] = useState(0)
 
    function handleNextClick() {
     if (index + 1 < toolList.length) {
@@ -31,9 +32,15 @@ function App() {
   }
 
   function addNewTool() {
-    if(inputValue){
-    setToolList([...toolList, inputValue]);
-    }
+    if(toolList.includes(inputValue)){
+      alert('Ferramenta já existe')
+    } else {
+      setToolList([...toolList, inputValue]);
+    };
+  };
+
+  function showImagem () {
+    setShowImg(!showImg);
   };
 
   return (
@@ -53,11 +60,17 @@ function App() {
       </section>
       <section>
         <h3>Lista de Ferramentas Atuais</h3>
-        <ul>
-          {toolList.map((tool) => (
-          <li>{tool}</li>))}
-        </ul>
-      </section>
+         <ul>
+           {toolList.map((tool) => (
+           <li>{tool}</li>))}
+         </ul>
+        </section>
+       <div>
+        {showImg && <img src="vite.svg"/>}
+          <button onClick={showImagem}>
+            {showImg ? 'Esconder logo' : 'Mostrar logo'}
+          </button>
+       </div>
       </div>
     </>
   );
